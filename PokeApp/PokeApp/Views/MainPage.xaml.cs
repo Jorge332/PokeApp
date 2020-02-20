@@ -17,9 +17,12 @@ namespace PokeApp.Views
             InitializeComponent();
         }
 
-        private void bar_TextChanged(object sender, TextChangedEventArgs e)
+        private void bar_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            (BindingContext as ViewModels.MainViewModel).LabelMessage = "";
+            if (e.PropertyName == "Text")
+            {
+                (BindingContext as ViewModels.MainViewModel).LabelMessage = "";
+            }
         }
     }
 }

@@ -6,6 +6,7 @@
              mc:Ignorable="d"
              Title="MainPage"
              xmlns:vm="clr-namespace:PokeApp.ViewModels"
+             xmlns:autoComplete ="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
              x:Class="PokeApp.Views.MainPage">
 
     <ContentPage.BindingContext>
@@ -13,15 +14,17 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Center" HorizontalOptions="Center"> 
- 
-                <SearchBar x:Name="bar" Placeholder="Search(Pikachu, Lucario, etc)..." SearchCommand="{Binding mySearchCommand}" 
-                       SearchCommandParameter="{Binding Source={x:Reference bar}, Path=Text}" HeightRequest="100" BackgroundColor="LightBlue"
-                           IsEnabled="{Binding IsNotWaiting}" TextChanged="bar_TextChanged"/>
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="20,0,20,0">
 
-                <Label Text="{Binding LabelMessage}" Padding="20,0,20,0" HeightRequest="40" TextColor="Red" FontSize="Body" HorizontalOptions="Center"/>
+            <autoComplete:SfAutoComplete x:Name="bar" DataSource="{Binding Sugestions}" IsEnabled="{Binding IsNotWaiting}"  
+                                         HeightRequest="100" BackgroundColor="LightBlue" SuggestionBoxPlacement="Bottom" PropertyChanged="bar_PropertyChanged"/>
 
-            <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}"/>
+            <Label Text="{Binding LabelMessage}"  HeightRequest="40" TextColor="Red" FontSize="Body" HorizontalOptions="Center"/>
+
+            <ActivityIndicator  IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}"/>
+
+            <Button Text="Buscar" Command="{ Binding mySearchCommand}" 
+                    CommandParameter="{Binding Source={x:Reference bar}, Path=Text}" IsEnabled="{Binding IsNotWaiting}"   />
 
         </StackLayout>
     </ContentPage.Content>
