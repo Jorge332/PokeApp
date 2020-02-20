@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Title="MainPage"
+             xmlns:vm="clr-namespace:PokeApp.ViewModels"
+             x:Class="PokeApp.Views.MainPage">
+
+    <ContentPage.BindingContext>
+        <vm:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center"> 
+ 
+                <SearchBar x:Name="bar" Placeholder="Search(Pikachu, Lucario, etc)..." SearchCommand="{Binding mySearchCommand}" 
+                       SearchCommandParameter="{Binding Source={x:Reference bar}, Path=Text}" HeightRequest="100" BackgroundColor="LightBlue"
+                           IsEnabled="{Binding IsNotWaiting}" TextChanged="bar_TextChanged"/>
+
+                <Label Text="{Binding LabelMessage}" Padding="20,0,20,0" HeightRequest="40" TextColor="Red" FontSize="Body" HorizontalOptions="Center"/>
+
+            <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
